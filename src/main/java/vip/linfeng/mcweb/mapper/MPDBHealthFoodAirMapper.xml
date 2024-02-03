@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vip.linfeng.mcweb.mapper.MPDBHealthFoodAirMapper">
+
+    <resultMap id="selectHealthFoodAirByUserUuidMap" type="healthFoodAir">
+        <id property="id" column="id"/>
+        <result property="uuid" column="player_uuid"/>
+        <result property="name" column="player_name"/>
+        <result property="health" column="health"/>
+        <result property="healthScale" column="health_scale"/>
+        <result property="maxHealth" column="max_health"/>
+        <result property="food" column="food"/>
+        <result property="saturation" column="saturation"/>
+        <result property="air" column="air"/>
+        <result property="maxAir" column="max_air"/>
+        <result property="syncComplete" column="sync_complete"/>
+        <result property="lastSeen" column="last_seen"/>
+    </resultMap>
+    <update id="setMaxHealthByUserUuid">
+        update
+            mpdb_health_food_air
+        set
+            max_health = #{param2}
+        where
+            player_uuid = #{param1};
+    </update>
+
+    <select id="selectHealthFoodAirByUserUuid" resultMap="selectHealthFoodAirByUserUuidMap">
+        select
+            id,
+            player_uuid,
+            player_name,
+            health,
+            health_scale,
+            max_health,
+            food,
+            saturation,
+            air,
+            max_air,
+            sync_complete,
+            last_seen
+        from
+            mpdb_health_food_air
+        where
+            player_uuid = #{param1}
+    </select>
+</mapper>

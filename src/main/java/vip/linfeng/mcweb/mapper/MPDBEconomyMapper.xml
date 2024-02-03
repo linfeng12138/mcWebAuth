@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vip.linfeng.mcweb.mapper.MPDBEconomyMapper">
+    <update id="layOutMoneyByUserUuid">
+        update
+            mpdb_economy
+        set
+            money = money - #{param2}
+        where
+            player_uuid = #{param1}
+    </update>
+    <update id="setMoneyByUserUuid">
+        update
+            mpdb_economy
+        set
+            money = #{param2}
+        where
+            player_uuid = #{param1}
+    </update>
+
+    <select id="selectMoneyByUserUuid" resultType="java.lang.Double">
+        select money from mpdb_economy where uuid = #{arg0}
+    </select>
+
+
+    <resultMap id="selectEconomyByUserUuidMap" type="economy">
+        <id property="id" column="id"/>
+        <result property="uuid" column="player_uuid"/>
+        <result property="name" column="player_name"/>
+        <result property="money" column="money"/>
+        <result property="offlineMoney" column="offline_money"/>
+        <result property="syncComplete" column="sync_complete"/>
+        <result property="lastSeen" column="last_seen"/>
+    </resultMap>
+
+    <select id="selectEconomyByUserUuid" resultMap="selectEconomyByUserUuidMap">
+        select
+            id,
+            player_uuid,
+            player_name,
+            money,
+            offline_money,
+            sync_complete,
+            last_seen
+        from
+            mpdb_economy
+        where
+            player_uuid = #{arg0}
+    </select>
+</mapper>

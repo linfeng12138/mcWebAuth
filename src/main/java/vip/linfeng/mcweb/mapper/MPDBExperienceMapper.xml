@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vip.linfeng.mcweb.mapper.MPDBExperienceMapper">
+
+    <resultMap id="selectExpByUserUuidMap" type="exp">
+        <id property="id" column="id"/>
+        <result property="uuid" column="player_uuid"/>
+        <result property="name" column="player_name"/>
+        <result property="exp" column="exp"/>
+        <result property="expToLevel" column="exp_to_level"/>
+        <result property="totalExp" column="total_exp"/>
+        <result property="expLvl" column="exp_lvl"/>
+        <result property="syncComplete" column="sync_complete"/>
+        <result property="lastSeen" column="last_seen"/>
+    </resultMap>
+
+    <select id="selectExpByUserUuid" resultMap="selectExpByUserUuidMap">
+        select
+            id,
+            player_uuid,
+            player_name,
+            exp,
+            exp_to_level,
+            total_exp,
+            exp_lvl,
+            sync_complete,
+            last_seen
+        from
+            mpdb_experience
+        where
+            player_uuid = #{arg0}
+    </select>
+</mapper>

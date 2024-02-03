@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/axios.min.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <link rel="stylesheet" href="./css/linfengTools.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./js/linfengTools.js"></script>
+    <script src="./js/index.js"></script>
+    <title>林风生存服</title>
+</head>
+
+<body class="mobile">
+    <div id="bigBox">
+        <div id="loginBox" :style="{display: login.display}">
+            <table class="loginTable">
+                <tr class="title">
+                    <td colspan="2">
+                        <h2>林风生存服</h2>
+                    </td>
+                </tr>
+                <tr class="username">
+                    <td>用户名：</td>
+                    <td><input v-model="login.username" type="text" placeholder="请输入用户名"></td>
+                </tr>
+                <tr class="password">
+                    <td>密码：</td>
+                    <td><input v-model="login.password" type="password" placeholder="请输入密码"></td>
+                </tr>
+                <tr class="loginBtnBox">
+                    <td colspan="2">
+                        <button @click="loginFun" class="loginBtn">登录</button>
+                    </td>
+                </tr>
+            </table>
+            <div class="helpBox">
+                <span @click="loginHelpInfo" class="helpText">遇到问题？</span>
+            </div>
+        </div>
+
+        <div id="userInfoBox" :style="{display: userInfoBox.display}">
+            <div class="paddingBox">
+                <div class="username">linfeng_12138</div>
+                <div class="health">
+                    <div class="title">
+                        生命值：
+                    </div>
+                    <div class="value">
+                        {{userInfoBox.userInfo.health}}/{{userInfoBox.userInfo.maxHealth}}
+                    </div>
+                </div>
+                <div class="money">
+                    <div class="title">金币：</div>
+                    <div class="value">{{userInfoBox.userInfo.money}}</div>
+                </div>
+                <div class="lv">
+                    <div class="title">当前等级：</div>
+                    <div class="value">{{userInfoBox.userInfo.lv}}</div>
+                </div>
+                <div class="food">
+                    <div class="title">
+                        当前饱食度：
+                    </div>
+                    <div class="value">
+                        {{userInfoBox.userInfo.food}}
+                    </div>
+                </div>
+                <div class="air">
+                    <div class="title">空气值：</div>
+                    <div class="value">{{userInfoBox.userInfo.air}}/{{userInfoBox.userInfo.maxAir}}</div>
+                </div>
+                <div class="buyHealthBtnBox">
+                    <button @click="buyHealthBtnFun" class="buyHealthBtn">购买最大生命值</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="alertBox" :style="{display: alertBox.display}">
+            <div class="alertClose" @click="alertHide">x</div>
+            <div class="alertTitle">{{alertBox.title}}</div>
+            <div class="alertContent">{{alertBox.text}}</div>
+        </div>
+
+        <div class="alertBox" :style="{display: buyMaxHealthAlert.display}">
+            <div class="alertClose" @click="buyMaxHealthAlertHide">x</div>
+            <div class="alertTitle">{{buyMaxHealthAlert.title}}</div>
+            <div class="alertContent">{{buyMaxHealthAlert.text}}</div>
+            <div class="yesBtnBox">
+                <button @click="buyMaxHealth" class="yesBtn">确定</button>
+                <button @click="buyMaxHealthAlertHide" class="closeBtn">取消</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
